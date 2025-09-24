@@ -1,0 +1,10 @@
+.welcome-text{
+    color:slateblue;
+    justify-self: center;
+    padding: 50px;
+    background-color:lightgrey;
+}
+.main-body{
+    background: lightgray;
+    min-height:1000px ;
+}
