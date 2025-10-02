@@ -1,11 +1,21 @@
-<div class="header-controler">
-    <a [routerLink]="['/']">
-        <div class="nav-bttn">TestApp</div>
-    </a>
-    <a [routerLink]="['/login']" underline="false">
-        <div class="nav-bttn">Login</div>
-    </a>
-    <a [routerLink]="['/register']">
-        <div class="nav-bttn">Sign Up</div>
-    </a>
+<div class="header-main">
+  <a [routerLink]="['/']" class="nav-bttn">
+    <div class="nav-text">TestApp</div>
+  </a>
+  @if ((isLoggedIn) | async){
+    <button matButton [matMenuTriggerFor]="action" class ="user-btn">{{username}}</button>
+    <mat-menu #action="matMenu" >
+        <button mat-menu-item >Info</button>
+        <button mat-menu-item (click)="handleLogOut()">Log Out</button>
+    </mat-menu>
+    } 
+    @else { 
+        <ng-container>
+          <a [routerLink]="['/login']" class="nav-bttn">
+          <div class="nav-text">Login</div>
+        </a>
+        <a [routerLink]="['/register']" class="nav-bttn">
+          <div class="nav-text">Sign Up</div> </a>
+      </ng-container>
+  }
 </div>

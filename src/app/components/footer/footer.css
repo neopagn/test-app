@@ -1,10 +1,11 @@
 .footer-body{
-    position:fixed;
+    position:relative;
     bottom: 0;
     left:0;
     padding:10px 0px 5px 10px;
-    width: 100%;
+    width:auto;
     background-color:rebeccapurple;
     color: white;
+    flex-shrink:0;
 
 }

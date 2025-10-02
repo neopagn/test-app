@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, Injector } from '@angular/core';
 import { LoginForm } from './login-form/login-form';
+import { AuthService } from '../../services/auth/auth-service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
