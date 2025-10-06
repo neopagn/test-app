@@ -72,6 +72,13 @@ input[type="email"]:focus {
   margin-top: 5px; 
 
 }
+
+.non-alert{
+  color:green;
+  font-size: 14px; 
+  margin-top: 5px; 
+}
+
 .login-error {
   background-color: #fef2f2;
   border: 1px solid #fecaca;

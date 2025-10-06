@@ -1,0 +1,16 @@
+<div class="landing-container">
+  <div class="main-content">
+    @if (userInfo$ | async; as user) {
+    <div class="user-details">
+      <h2 class="user-name">Xin chào, {{ user.firstName }} {{ user.secondName }}</h2>
+      <p class="user-general">Email: {{ user.email }}</p>
+      <p class="user-general">Tuổi: {{ user.age }}</p>
+      <p class="user-general">Username: {{ user.username }}</p>
+      <p class="user-general">MONEY: {{ value | currency| capitalize }}|| BEFORE: {{ value }}</p>
+    </div>
+    } @else {
+    <p class="head-line">Chưa đăng nhập.</p>
+    }
+  </div>
+</div>
+`

@@ -6,7 +6,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  padding: 4px 8px ;
+  padding: 4px 8px;
   gap: 8px 12px;
   border: none;
   min-height: 2.5rem;
@@ -19,25 +19,39 @@
   align-items: center;
   text-decoration: none;
   padding: 6px 12px;
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 9999px;
   border: 0;
   color: inherit;
 }
 .nav-bttn:hover {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .nav-text {
   font-size: 18px;
   color: inherit;
   font-weight: 500;
-  
 }
-button.user-btn{
-  background-color: rgba(255, 255, 255, 0.25);
-  color: white !important; 
+button.user-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white !important;
 
   font-size: 18px;
-  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.mat-mdc-menu-item{
+  background-color: lightblue ;
+  justify-items: right;
+
+} 
+
+.mat-mdc-menu{
+  background-color: lightblue ;
+  color:lightblue;
+
 }

@@ -41,19 +41,26 @@
           #password="ngModel"
           required
           password
-          autocomplete="current-password"  
+          autocomplete="current-password"
+          passwordValidate
         />
-        @if(password.invalid && (password.dirty || password.touched)){
+        @if((password.dirty || password.touched)){ @if (password.invalid ){
         <div class="alert">
           @if(password.hasError('required')){
           <div>Password is required.</div>
-          } @if(password.hasError('minlength')){
+          } @else if(password.hasError('minlength')){
           <div>Password must be atleast 8 characters.</div>
+          } @else if(password.hasError('lackSecurity')){
+          <div>Password must have a Capital, a normal, a special character, and a number</div>
           }
         </div>
-        }
+        } @else {
+        <div class="non-alert">Strong password!</div>
+        } }
       </div>
 
+
+        
       <!-- Email FILL -->
       <div class="form-group">
         <label for="emailAddress">Địa chỉ email </label>

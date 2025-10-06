@@ -3,11 +3,12 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { User } from '../../../types/user';
 import {  RegisterService } from '../../../services/register/register-service';
 import { Router } from '@angular/router';
+import { passwordValidatorTemplateDriven } from "../../../validators/password-validator template-driven";
 
 @Component({
   selector: 'app-register-form',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, passwordValidatorTemplateDriven],
   templateUrl: './register-form.html',
   styleUrl: './register-form.css',
 })

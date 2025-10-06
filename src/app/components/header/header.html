@@ -3,9 +3,10 @@
     <div class="nav-text">TestApp</div>
   </a>
   @if ((isLoggedIn) | async){
-    <button matButton [matMenuTriggerFor]="action" class ="user-btn">{{username}}</button>
-    <mat-menu #action="matMenu" >
-        <button mat-menu-item >Info</button>
+    <button matButton [matMenuTriggerFor]="action" class ="user-btn">{{username|async}} ▼
+    </button>
+    <mat-menu #action="matMenu" xPosition="before" yPosition="below">
+        <button mat-menu-item [routerLink]="['/userInfo']" >Info</button>
         <button mat-menu-item (click)="handleLogOut()">Log Out</button>
     </mat-menu>
     } 

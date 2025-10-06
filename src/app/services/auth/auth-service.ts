@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { User } from '../../types/user';
 import { BehaviorSubject, map, Observable, of, throwError, tap } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { StorageService } from '../localStorage/storage-service';
 
 const TOKEN_KEY = 'auth_token';
@@ -15,22 +15,24 @@ export class AuthService {
   private localStorageService = inject(StorageService);//localstorage alt for ssr
 
   private _CurrentUser = new BehaviorSubject<User | null>(null);
-
   readonly CurrentUser$ = this._CurrentUser.asObservable();
-
   readonly loginStatus$ = this.CurrentUser$.pipe(map((user) => !!user));
+  username$  = this.CurrentUser$.pipe(map(user=> user ?  user.username : null))
 
   constructor() {
     //get user tu local storage de check xem co user nao chua. tao ham
-    const userString = this.localStorageService.get('currentUser'); //get user tu local
+    // const userString = this.localStorageService.get('currentUser'); //get user tu local
     //risk of having info leaked. //
     // Shouldnt save user on localStorage, should get token, and fetch it from BE somehow.
     const token = this.localStorageService.get(TOKEN_KEY);
-    if (userString && token) {
+    if ( token) {//here if(token) const curUser = fetch(token), this._currentUser.next(JSON.parse(curUser));
       //neu co user
-      this._CurrentUser.next(JSON.parse(userString));
-      console.log(this._CurrentUser)
+      const user = this.fetchUser(token);
+      this._CurrentUser.next(user);
+      console.log('current user:')
+      console.log( this._CurrentUser)
       console.log('Token retreived ');
+
     }
   }
 
@@ -51,17 +53,15 @@ export class AuthService {
     switch (apiResponse) {
       case 200: {
         console.log('Login Successful!');
-        //fake token
-        const mockToken = btoa(credentials.email + '|' + Date.now()); //HAVE TO GET IT FROM BE
-        //fake user
+        const mockToken = btoa(credentials.email + '|' + Date.now()); 
         const mockUser = new User(
           1,
           'duong',
           'Nguyen',
-          25,
+          36,
           credentials.email,
+          credentials.password,
           credentials.email,
-          credentials.password
         );
         this.addUserToLocal(mockUser, mockToken);
         this._CurrentUser.next(mockUser);
@@ -84,12 +84,22 @@ export class AuthService {
 
   // them xoa user trong local:
   private addUserToLocal(user: User, token: string) {
-    this.localStorageService.set('currentUser', JSON.stringify(user));
+    // this.localStorageService.set('currentUser', JSON.stringify(user));
     this.localStorageService.set(TOKEN_KEY, token);
   }
   //delete
   private deleteUserFromLocal() {
-    this.localStorageService.remove('currentUser');
+    // this.localStorageService.remove('currentUser');
     this.localStorageService.remove(TOKEN_KEY);
+  }
+  private fetchUser(token:string):User{
+    //real prj would fetch api from backend here, for now just return data.
+    return {id:1,
+          firstName:'duong',
+          secondName:'Nguyen',
+          age:36,
+          email:'nguyenA@gmail.com',
+          password:'12345678',
+          username:'nguyenA@gmail.com',}
   }
 }

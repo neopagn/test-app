@@ -9,12 +9,13 @@ import { MockBe } from './services/mockBE/mock-be';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideRouter(routes),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideRouter(routes), provideClientHydration(withEventReplay()),
+     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),  
-    importProvidersFrom(
-      HttpClientInMemoryWebApiModule.forRoot(MockBe, { dataEncapsulation: false })
-    ),
+    // importProvidersFrom(
+    //   HttpClientInMemoryWebApiModule.forRoot(MockBe, { dataEncapsulation: false })
+    // ),
   ]
 };
