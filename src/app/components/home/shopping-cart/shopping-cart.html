@@ -1,10 +1,10 @@
-<div class="text-black mt-8 ">
+<div class=" mt-8 ">
   <p-table [value]="(currentCart$ | async) || []" class="rounded-border!">
     <ng-template #header>
       <tr>
         <th></th>
-        <th class="font-medium! text-secondary ">Tên sản phẩm</th>
-        <th class="font-medium! text-secondary ">Phân loại</th>
+        <th class="font-medium! text-secondary">Tên sản phẩm</th>
+        <th class="font-medium! text-secondary">Phân loại</th>
         <th class="text-center! font-medium! text-secondary">Số lượng</th>
         <th class="text-right! font-medium! text-secondary">Giá</th>
       </tr>
@@ -12,14 +12,25 @@
     <ng-template #body let-item>
       <tr>
         <td>
-          <i class="pi pi-times cursor-pointer" (click)="removeItemFromCart(item.item.id, 0)"></i>
+          <i class="pi pi-times cursor-pointer" (click)="removeItemFromCart(item.item.id)"></i>
         </td>
         <td class="text-right">{{ item.item.name }}</td>
         <td class="text-right">{{ item.item.category }}</td>
         <td class="flex justify-center items-center space-x-2">
-          <i class="pi pi-minus cursor-pointer" (click)="removeItemFromCart(item.item.id, 1)" ></i>
-          <span class="select-none font-medium">{{ item.inCartAmount }}</span>
-          <i class="pi pi-plus cursor-pointer" (click)="addItemToCart(item.item)"></i>
+          <p-input-number
+            size="small"
+            inputId="integeronly"
+            [(ngModel)]="item.inCartAmount"
+            (onInput)="changeAmountTo(item, item.inCartAmount)"
+            (onBlur)="changeAmountTo(item, item.inCartAmount)"
+            [max]="999"
+            [min]="0"
+            showButtons="true"
+            buttonLayout="horizontal"
+          >
+            <ng-template #incrementbuttonicon><span class="pi pi-plus"></span> </ng-template>
+            <ng-template #decrementbuttonicon><span class="pi pi-minus"></span> </ng-template>
+          </p-input-number>
         </td>
         <td class="text-right!">{{ item.item.price | priceFormat }} đ</td>
       </tr>

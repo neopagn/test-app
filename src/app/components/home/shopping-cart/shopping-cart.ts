@@ -1,16 +1,17 @@
 import { Component, inject } from '@angular/core';
 import { TableModule} from 'primeng/table';
 import { ProductCartService } from '../../../services/product/product-cart-service';
-import { AsyncPipe } from '@angular/common';
-import { BaseIcon } from "primeng/icons/baseicon";
+import { AsyncPipe  } from '@angular/common';
 import { map } from 'rxjs';
 import { PriceFormatPipe } from '../../../pipes/priceFormat-pipe/price-format-pipe';
 import { CurrencyPipe } from '../../../pipes/currency-pipe';
 import { CapitalizePipe } from '../../../pipes/capitalize-pipe';
+import { InputNumber,  } from 'primeng/inputnumber';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-shopping-cart',
-  imports: [TableModule, AsyncPipe, PriceFormatPipe, CurrencyPipe, CapitalizePipe],
+  imports: [TableModule, AsyncPipe, PriceFormatPipe, CurrencyPipe, CapitalizePipe, InputNumber, FormsModule],
   templateUrl: './shopping-cart.html',
   styleUrl: './shopping-cart.css'
 })
@@ -29,7 +30,10 @@ export class ShoppingCart {
   addItemToCart(item:any){
     this.cartService.addItem(item);
   }
-  removeItemFromCart(itemID:any, amount:number){
-    this.cartService.removeItem(itemID, amount);
+  removeItemFromCart(itemID:any){
+    this.cartService.removeItem(itemID);
+  }
+  changeAmountTo(item:any, amount:number){
+    this.cartService.changeAmount(item,amount);
   }
 }
