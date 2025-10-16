@@ -1,16 +1,27 @@
-<div class="landing-container">
+<div class="landing-container ">
   <div class="main-content">
     @if (userInfo$ | async; as user) {
     <div class="user-details">
-      <h2 class="user-name">Xin chào, {{ user.firstName }} {{ user.secondName }}</h2>
-      <p class="user-general">Email: {{ user.email }}</p>
-      <p class="user-general">Tuổi: {{ user.age }}</p>
-      <p class="user-general">Username: {{ user.username }}</p>
-      <p class="user-general">MONEY: {{ value | currency| capitalize }}|| BEFORE: {{ value }}</p>
+      <h2 class="font-bold text-xl text-gray-700">
+        Xin chào, {{ user.firstName }} {{ user.secondName }}
+      </h2>
+      <p class="text-lg text-gray-700">Email: {{ user.email }}</p>
+      <p class="text-lg text-gray-700">Tuổi: {{ user.age }}</p>
+      <p class="text-lg text-gray-700">Username: {{ user.username }}</p>
+      <div class="mt-5 mb-5">
+        <p-float-label [variant]="'in'">
+          <input pInputText id="in_label" [(ngModel)]="currency" />
+          <label for="in_label">Nhập số tiền</label>
+        </p-float-label>
+      </div>
+      <p class="text-lg text-gray-700">
+        MONEY: {{ currency | currency | capitalize }}|| BEFORE: {{ currency | priceFormat}}
+      </p>
+
+      <app-shopping-cart></app-shopping-cart>
     </div>
     } @else {
     <p class="head-line">Chưa đăng nhập.</p>
     }
   </div>
 </div>
-`

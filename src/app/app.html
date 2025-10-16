@@ -1,8 +1,7 @@
-<app-header></app-header>
-    <main>
-      <section class="content">
-        <router-outlet></router-outlet>
-        
-      </section>
-    </main>
-    <app-footer></app-footer>
+<div class="min-h-screen flex flex-col w-full">
+  <app-header></app-header>
+  <section class="content flex-grow">
+    <router-outlet></router-outlet>
+  </section>
+  <app-footer></app-footer>
+</div>

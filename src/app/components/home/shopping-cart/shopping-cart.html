@@ -1,0 +1,39 @@
+<div class="text-black mt-8 ">
+  <p-table [value]="(currentCart$ | async) || []" class="rounded-border!">
+    <ng-template #header>
+      <tr>
+        <th></th>
+        <th class="font-medium! text-secondary ">Tên sản phẩm</th>
+        <th class="font-medium! text-secondary ">Phân loại</th>
+        <th class="text-center! font-medium! text-secondary">Số lượng</th>
+        <th class="text-right! font-medium! text-secondary">Giá</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-item>
+      <tr>
+        <td>
+          <i class="pi pi-times cursor-pointer" (click)="removeItemFromCart(item.item.id, 0)"></i>
+        </td>
+        <td class="text-right">{{ item.item.name }}</td>
+        <td class="text-right">{{ item.item.category }}</td>
+        <td class="flex justify-center items-center space-x-2">
+          <i class="pi pi-minus cursor-pointer" (click)="removeItemFromCart(item.item.id, 1)" ></i>
+          <span class="select-none font-medium">{{ item.inCartAmount }}</span>
+          <i class="pi pi-plus cursor-pointer" (click)="addItemToCart(item.item)"></i>
+        </td>
+        <td class="text-right!">{{ item.item.price | priceFormat }} đ</td>
+      </tr>
+    </ng-template>
+    <ng-template #footer class="text-right">
+      <tr>
+        <td colspan="4" class="text-right justify-center items-center text-xl">Tổng tiền</td>
+        <td colspan="1" class="text-right!">{{ (totalPrice | async) ?? 0 | priceFormat }} đ</td>
+      </tr>
+      <tr>
+        <td colspan="5" class="text-right! whitespace-nowrap!">
+          <p>{{ (totalPrice | async) ?? 0 | currency | capitalize }} đồng</p>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

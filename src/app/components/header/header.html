@@ -3,20 +3,24 @@
     <div class="nav-text">TestApp</div>
   </a>
   @if ((isLoggedIn) | async){
-    <button matButton [matMenuTriggerFor]="action" class ="user-btn">{{username|async}} ▼
+  <div class="button-wrapper">
+    <button class="user-btn" (click)="menu.toggle($event)">
+      {{ username | async }} 
+      <i class="pi pi-ellipsis-v" style="color: white"></i> 
+      <p-menu #menu [model]="items" [popup]="true"></p-menu>
     </button>
-    <mat-menu #action="matMenu" xPosition="before" yPosition="below">
+  </div>
+
+  <!-- <mat-menu #action="matMenu" xPosition="before" yPosition="below">
         <button mat-menu-item [routerLink]="['/userInfo']" >Info</button>
         <button mat-menu-item (click)="handleLogOut()">Log Out</button>
-    </mat-menu>
-    } 
-    @else { 
-        <ng-container>
-          <a [routerLink]="['/login']" class="nav-bttn">
-          <div class="nav-text">Login</div>
-        </a>
-        <a [routerLink]="['/register']" class="nav-bttn">
-          <div class="nav-text">Sign Up</div> </a>
-      </ng-container>
+    </mat-menu> -->
+  } @else {
+  <ng-container>
+    <a [routerLink]="['/login']" class="nav-bttn">
+      <div class="nav-text">Login</div>
+    </a>
+    <a [routerLink]="['/register']" class="nav-bttn"> <div class="nav-text">Sign Up</div> </a>
+  </ng-container>
   }
 </div>

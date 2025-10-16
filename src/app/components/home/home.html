@@ -1,16 +1,26 @@
-<div class="landing-container">
-  <div class="main-content">
-      
-
+<div>
+  <div class="landing-container">
+    <div class="main-content">
       <div class="welcome-section">
-          <h1 class="welcome-heading">Chào mừng {{username|async}} đến với TestApp </h1>
-          <p class="tagline">Giải pháp quản lý dữ liệu hiệu quả và trực quan cho mọi nhu cầu của bạn.</p>
-          
-          @if (isLoggedin|async){}
-          @else {<div class="button">
-              <button class="btn btn-primary" [routerLink]="['/login']">Đăng nhập</button>
-              <button class="btn btn-secondary"[routerLink]="['/register']">Đăng ký</button>
-          </div>}
+        <h1 class="welcome-heading">Chào mừng {{ username | async }} đến với TestApp</h1>
+        <p class="tagline">
+          Giải pháp quản lý dữ liệu hiệu quả và trực quan cho mọi nhu cầu của bạn.
+        </p>
+
+        @if (isLoggedin|async){
+          <div class="rounded-border border-2 border-blue-200 p-4">
+            <app-product-list></app-product-list>
+            <app-shopping-cart></app-shopping-cart>
+          </div>
+
+        } @else {
+        <div class="button">
+          <button class="btn btn-primary" [routerLink]="['/login']">Đăng nhập</button>
+          <button class="btn btn-secondary" [routerLink]="['/register']">Đăng ký</button>
+        </div>
+        }
+        
       </div>
+    </div>
   </div>
 </div>

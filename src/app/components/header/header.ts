@@ -1,13 +1,13 @@
-import { Component, inject, Injector } from '@angular/core';
+import { Component, inject, Injector, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth/auth-service';
-import { map, Observable } from 'rxjs';
-import {MatMenu, MatMenuModule} from '@angular/material/menu';
-import { MatButton, MatButtonModule } from '@angular/material/button';
 import { AsyncPipe } from '@angular/common';
+import { FormsModule } from "@angular/forms";
+import { Menu } from 'primeng/menu';
+import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-header',
-  imports: [RouterLink,MatMenuModule, MatButtonModule, AsyncPipe],
+  imports: [RouterLink, AsyncPipe, FormsModule, Menu, ButtonModule ],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })
@@ -19,4 +19,27 @@ export class Header {
   handleLogOut(){
     this.auth.logout();
   }
+
+  items :any;
+  ngOnInit() {
+    this.items = [
+        {
+            label: 'Options', 
+            items: [
+                {
+                    label: 'Info',
+                    icon: 'pi pi-info',
+                    routerLink: ['/userInfo'] ,
+                },
+                {
+                    label: 'Log out',
+                    icon: 'pi pi-sign-out',
+                    command: () =>{
+                      this.handleLogOut();
+                    }
+                }
+            ]
+        }
+    ];
+}
 }

@@ -1,62 +1,61 @@
-<div>
-    <h2 class="header"> Login</h2>
+<div class="bg-white ">
+  <div>
+    <h2 class="header">Login</h2>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="email" >Email</label>
-            <input id="email" name="Email" type="email"  placeholder="Email" 
-            formControlName="email" required autocomplete="email">
-            @if (email?.invalid && (email?.dirty||email?.touched)){
-                <div class="alert">
-                    @if(email?.hasError('required')){
-                        <div>
-                            Email is required.
-                        </div>
-                    }
-                    @if(email?.hasError('email')){
-                        <div>
-                            Email invalid.
-                        </div>
-                    }
-                    
-                </div>
-            }
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          name="Email"
+          type="email"
+          placeholder="Email"
+          formControlName="email"
+          required
+          autocomplete="email"
+        />
+        @if (email?.invalid && (email?.dirty||email?.touched)){
+        <div class="alert">
+          @if(email?.hasError('required')){
+          <div>Email is required.</div>
+          } @if(email?.hasError('email')){
+          <div>Email invalid.</div>
+          }
         </div>
-
-        <div class="form-group"> 
-            <label for="password"> Password </label>
-            <input id="password" name ="Password"  type="password" placeholder="Password"
-            formControlName="password"
-            required autocomplete="current-password">
-            @if(password?.invalid && (password?.dirty || password?.touched)){
-                <div class="alert">
-                    @if(password?.hasError('required')){
-                        <div>
-                            Password is required.
-                        </div>
-                    }
-                    @if(password?.hasError('minlength')){
-                        <div>
-                            Password must be atleast 8 characters.
-                        </div>
-                    }
-                </div>
-            }
-        </div>
-        
-        <!-- Login Error Display -->
-        @if (loginError) {
-            <div class="login-error">
-                {{ loginError }}
-            </div>
         }
-        
-        <button type="submit" [disabled]="isLoading">
-            @if (isLoading) {
-                Logging in...
-            } 
-            @else {
-                Submit
-            }
-        </button>
+      </div>
+
+      <div class="form-group">
+        <label for="password"> Password </label>
+        <input
+          id="password"
+          name="Password"
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+          required
+          autocomplete="current-password"
+        />
+        @if(password?.invalid && (password?.dirty || password?.touched)){
+        <div class="alert">
+          @if(password?.hasError('required')){
+          <div>Password is required.</div>
+          } @if(password?.hasError('minlength')){
+          <div>Password must be atleast 8 characters.</div>
+          }
+        </div>
+        }
+      </div>
+
+      <!-- Login Error Display -->
+      @if (loginError) {
+      <div class="login-error">
+        {{ loginError }}
+      </div>
+      }
+
+      <button type="submit" [disabled]="isLoading">
+        @if (isLoading) { Logging in... } @else { Submit }
+      </button>
     </form>
+  </div>
 </div>
