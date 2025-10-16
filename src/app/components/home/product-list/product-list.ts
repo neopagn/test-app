@@ -72,3 +72,5 @@ export class ProductList {
     this.hoveringProductId.set(null);
   }
 }
+//700 xe 900 phong 250 dien 300pql 500an
+//900 
