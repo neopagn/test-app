@@ -366,6 +366,18 @@ export class ProductService {
         inventoryStatus: 'INSTOCK',
         rating: 8,
       },
+      {
+        id: '1030',
+        code: 'gwuby345v',
+        name: 'Yoga Set',
+        description: 'Product Description',
+        image: 'yoga-set.jpg',
+        price: 1,
+        category: 'Fitness',
+        quantity: 25,
+        inventoryStatus: 'INSTOCK',
+        rating: 8,
+      },
     ];
   }
 }

@@ -9,6 +9,7 @@ import { CapitalizePipe } from '../../../pipes/capitalize-pipe';
 import { InputNumber,  } from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
 
+
 @Component({
   selector: 'app-shopping-cart',
   imports: [TableModule, AsyncPipe, PriceFormatPipe, CurrencyPipe, CapitalizePipe, InputNumber, FormsModule],

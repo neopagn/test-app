@@ -7,9 +7,12 @@ import { ButtonModule } from 'primeng/button';
 import PaginatorModule, { Paginator } from 'primeng/paginator';
 import { PriceFormatPipe } from '../../../pipes/priceFormat-pipe/price-format-pipe';
 import { ProductCartService } from '../../../services/product/product-cart-service';
+import { Rating } from 'primeng/rating';
+
+
 @Component({
   selector: 'app-product-list',
-  imports: [DataView, NgFor, Tag, ButtonModule, CommonModule, Paginator, PriceFormatPipe],
+  imports: [DataView, NgFor, Tag, ButtonModule, CommonModule, Paginator, PriceFormatPipe,Rating],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
   encapsulation: ViewEncapsulation.Emulated,
@@ -17,7 +20,8 @@ import { ProductCartService } from '../../../services/product/product-cart-servi
 export class ProductList {
   products = signal<any>([]);
   productService = inject(ProductService);
-  cartService = inject(ProductCartService)
+  cartService = inject(ProductCartService);
+  hoveringProductId = signal<number|null>(null);
 
   first: number = 0;
   rows: number = 5;
@@ -57,7 +61,14 @@ export class ProductList {
     this.loadData(this.first, this.rows);
   }
 
-  addItemToCart(item:any){
+  addItemToCart(item: any) {
     this.cartService.addItem(item);
+  }
+
+  showRating(id:any){
+    this.hoveringProductId.set(id);
+  }
+  hideRating(){
+    this.hoveringProductId.set(null);
   }
 }
