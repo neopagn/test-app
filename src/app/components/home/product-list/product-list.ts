@@ -1,4 +1,4 @@
-import { Component, inject, signal, ViewEncapsulation } from '@angular/core';
+import { Component, inject, input, signal, ViewEncapsulation } from '@angular/core';
 import { DataView } from 'primeng/dataview';
 import { ProductService } from '../../../services/product/product-service';
 import { CommonModule, NgFor } from '@angular/common';
@@ -22,6 +22,7 @@ export class ProductList {
   productService = inject(ProductService);
   cartService = inject(ProductCartService);
   hoveringProductId = signal<number|null>(null);
+  layout = input<'list' | 'grid'>('list');
 
   first: number = 0;
   rows: number = 5;
@@ -32,6 +33,8 @@ export class ProductList {
     const data = this.productService.getProduct();
     this.products.set([...data]);
     this.totalRecord = this.products().length;
+    if(this.layout()==='list') this.rows=5;
+    else this.rows=20;
     this.loadData(this.first, this.rows);
   }
   getSeverity(data: any) {
@@ -71,6 +74,5 @@ export class ProductList {
   hideRating(){
     this.hoveringProductId.set(null);
   }
+  
 }
-//700 xe 900 phong 250 dien 300pql 500an
-//900 

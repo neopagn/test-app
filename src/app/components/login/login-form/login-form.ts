@@ -43,7 +43,6 @@ export class LoginForm {
         password: formValue.password!,
       };
 
-      console.log('Form values:', userCredentials);
       this.injector
         .get(AuthService)
         .login(userCredentials)

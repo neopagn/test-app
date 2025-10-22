@@ -3,3 +3,17 @@
     text-align: center; 
    
 }
+
+:host ::ng-deep .p-datatable-table-container{
+    border-radius: 5px !important;
+}
+
+
+@media (max-width: 639px){
+    ::ng-deep .p-inputnumber-increment-button{
+        display: none !important;
+    }
+    ::ng-deep .p-inputnumber-decrement-button{
+        display: none !important;
+    }
+}

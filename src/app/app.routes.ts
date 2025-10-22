@@ -5,6 +5,7 @@ import { Register } from './components/register/register';
 import { App } from './app';
 import { UserInfo } from './components/user/user-info/user-info';
 import { loginGuard } from './guard/login-guard';
+import { Browsing } from './components/browsing/browsing';
 
 export const routes: Routes = [
     {
@@ -25,6 +26,10 @@ export const routes: Routes = [
     {
         path: 'userInfo',
         component: UserInfo,
+    },
+    {
+        path: 'browse',
+        component: Browsing,
     }
 
     

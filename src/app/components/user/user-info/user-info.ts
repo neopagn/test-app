@@ -11,15 +11,16 @@ import { FloatLabel } from 'primeng/floatlabel';
 import { FormsModule } from '@angular/forms';
 import { PriceFormatPipe } from '../../../pipes/priceFormat-pipe/price-format-pipe';
 import { ShoppingCart } from "../../home/shopping-cart/shopping-cart";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-user-info',
-  imports: [AsyncPipe, CurrencyPipe, CapitalizePipe, InputTextModule, FloatLabel, FormsModule, PriceFormatPipe, ShoppingCart],
+  imports: [AsyncPipe, CurrencyPipe, CapitalizePipe, InputTextModule, FloatLabel, FormsModule, PriceFormatPipe, ShoppingCart, RouterModule],
   templateUrl: './user-info.html',
   styleUrl: './user-info.css',
 })
 export class UserInfo {
   private auth = inject(AuthService);
   userInfo$ = this.auth.CurrentUser$.pipe(map((user) => (user ? user : null)));
-  currency:number = 20000000001;
+  currency:number = 200000000001;
 }

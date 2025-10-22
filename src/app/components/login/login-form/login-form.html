@@ -1,6 +1,6 @@
 <div class="bg-white ">
   <div>
-    <h2 class="header">Login</h2>
+    <h2 class="header">Đăng nhập</h2>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="email">Email</label>
@@ -8,7 +8,7 @@
           id="email"
           name="Email"
           type="email"
-          placeholder="Email"
+          placeholder="Email của bạn"
           formControlName="email"
           required
           autocomplete="email"
@@ -30,7 +30,7 @@
           id="password"
           name="Password"
           type="password"
-          placeholder="Password"
+          placeholder="Mật khẩu của bạn"
           formControlName="password"
           required
           autocomplete="current-password"
@@ -54,7 +54,7 @@
       }
 
       <button type="submit" [disabled]="isLoading">
-        @if (isLoading) { Logging in... } @else { Submit }
+        @if (isLoading) { Logging in... } @else { Đăng nhập }
       </button>
     </form>
   </div>

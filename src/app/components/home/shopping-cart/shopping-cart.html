@@ -1,12 +1,12 @@
 <div class=" mt-8 ">
-  <p-table [value]="(currentCart$ | async) || []" class="rounded-border!">
+  <p-table [value]="(currentCart$ | async) || []" class=" text-xs sm:text-sm md:text-lg">
     <ng-template #header>
       <tr>
         <th></th>
-        <th class="font-medium! text-secondary">Tên sản phẩm</th>
-        <th class="font-medium! text-secondary">Phân loại</th>
-        <th class="text-center! font-medium! text-secondary">Số lượng</th>
-        <th class="text-right! font-medium! text-secondary">Giá</th>
+        <th class="font-medium text-secondary">Tên sản phẩm</th>
+        <th class="font-medium text-secondary">Phân loại</th>
+        <th class="text-center font-medium! text-secondary">Số lượng</th>
+        <th class="text-right font-medium! text-secondary">Giá</th>
       </tr>
     </ng-template>
     <ng-template #body let-item>
@@ -17,6 +17,7 @@
         <td class="text-right">{{ item.item.name }}</td>
         <td class="text-right">{{ item.item.category }}</td>
         <td class="flex justify-center items-center space-x-2">
+          
           <p-input-number
             size="small"
             inputId="integeronly"
@@ -32,13 +33,13 @@
             <ng-template #decrementbuttonicon><span class="pi pi-minus"></span> </ng-template>
           </p-input-number>
         </td>
-        <td class="text-right!">{{ item.item.price | priceFormat }} đ</td>
+        <td class="text-right!  whitespace-nowrap">{{ item.item.price | priceFormat }} đ</td>
       </tr>
     </ng-template>
     <ng-template #footer class="text-right">
       <tr>
         <td colspan="4" class="text-right justify-center items-center text-xl">Tổng tiền</td>
-        <td colspan="1" class="text-right!">{{ (totalPrice | async) ?? 0 | priceFormat }} đ</td>
+        <td colspan="1" class="text-right! whitespace-nowrap">{{ (totalPrice | async) ?? 0 | priceFormat }} đ</td>
       </tr>
       <tr>
         <td colspan="5" class="text-right! whitespace-nowrap!">

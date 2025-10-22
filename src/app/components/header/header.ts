@@ -1,5 +1,5 @@
 import { Component, inject, Injector, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth/auth-service';
 import { AsyncPipe } from '@angular/common';
 import { FormsModule } from "@angular/forms";
@@ -37,6 +37,11 @@ export class Header {
                     command: () =>{
                       this.handleLogOut();
                     }
+                },
+                {
+                  label: 'Shopping',
+                  icon: 'pi pi-cart',
+                  routerLink: ['/browse']
                 }
             ]
         }

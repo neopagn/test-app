@@ -6,7 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CurrencyPipe implements PipeTransform {
   transform(value: number): string {
     if (value === 0) return 'Không ';
-    let res: string = '';
     const postfix: string[] = ['', 'mươi ', 'trăm ', 'nghìn ', 'triệu ', 'tỷ '];
     const thousands: string[] = ['', 'nghìn ', 'triệu ', 'tỷ '];
     const toNum: string[] = [
@@ -45,13 +44,17 @@ export class CurrencyPipe implements PipeTransform {
       //không trăm: val && ones||tens
 
       //hund:
-      if (hund === 0 && !((ones || tens) && val)) hundString = '';
+      if ((hund === 0 && ones == 0 && tens == 0) || (!hund && !val))
+        //trường hợp không hiện không trăm: khi bên trên không còn đv nữa, phải xóa không trăm để đỡ thừa
+        // hoặc trường hợp cả 3 số bằng 0 .
+        //nếu ones ==0 và tens ==0 thì không có gì, đồng thời ở đơn vị cao hơn còn gt-> nếu mà bọn nó có thì sang else chứ!
+        hundString = '';
       else hundString = toNum[hund] + postfix[2];
 
       //tens:
       if (tens === 1) tenString = 'mười ';
       else if (tens === 0) {
-        if ((val || hund)&&ones) tenString = 'linh ';
+        if ((val || hund) && ones) tenString = 'linh ';
         else tenString = '';
       } else tenString = toNum[tens] + postfix[1];
 
@@ -70,8 +73,10 @@ export class CurrencyPipe implements PipeTransform {
       let bVal = Math.trunc(val % 1000000000);
       let bac = 0;
       while (bVal) {
-        let currentTString = thousandHandle(bVal);
+        let currentTString = thousandHandle(val);
         bVal = Math.trunc(bVal / 1000);
+        val = Math.trunc(val / 1000);
+
         if (currentTString) {
           currentTString = currentTString + thousands[bac];
         }
@@ -87,9 +92,10 @@ export class CurrencyPipe implements PipeTransform {
       let postElem = '';
       while (val) {
         let currentString = billionHandle(val);
+        postElem = postElem + thousands[3];
+        if (val >= 1000000000) currentString = postElem + currentString;
+        res = currentString + res;
         val = Math.trunc(val / 1000000000);
-        if (val) postElem = postElem + thousands[3];
-        res = currentString + postElem +res;
       }
 
       return res;

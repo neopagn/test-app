@@ -6,12 +6,12 @@
     [rowsPerPageOptions]="[5, 10, 20]"
     (onPageChange)="onPageChange($event)"
   ></p-paginator>
-  <p-dataview #dv [value]="onDisplayProduct()">
+  <p-dataview #dv [value]="onDisplayProduct()" [layout]="layout()">
     <ng-template #list let-items>
-      <div class="grid grid-cols-12 gap-4">
+      <div class="grid grid-cols-12 gap-4 bg-gray-300">
         <div class="col-span-12" *ngFor="let item of items; let first = first">
           <div
-            class="flex flex-row p-6 gap-4 justify-around flex-1"
+            class="flex flex-col p-6 gap-4 justify-around flex-1 sm:flex-row"
             [ngClass]="{ 'border-t border-surface-200 dark:border-surface-700': !first }"
           >
             <div class="relative md:w-40">
@@ -30,38 +30,36 @@
               >
               </p-tag>
             </div>
-            <div class="flex flex-row flex-1">
+            <div class="flex flex-col flex-1 sm:flex-row">
               <!-- the rest  -->
-              <div class="flex flex-col justify-between">
-                <!-- cate, name, price-->
-                <div>
+              <div class="flex flex-row justify-between sm:flex-col">
+                <!-- cate, name, rating-->
+                <div class="">
                   <div class="font-medium text-secondary text-sm">
                     {{ item.category }}
                   </div>
-                  <div class="font-medium text-secondary text-lg">
+                  <div class="font-medium text-secondary text-xl md:text-2xl">
                     {{ item.name }}
                   </div>
                 </div>
                 <div
-                  class="font-medium text-secondary text-sm cursor-pointer flex-row "
+                  class="font-medium text-secondary text-sm cursor-pointer flex-row"
                   (mouseenter)="showRating(item.id)"
                   (mouseleave)="hideRating()"
-                  
                 >
-                @if(hoveringProductId()===item.id){
+                  @if(hoveringProductId()===item.id){
                   <p-rating> </p-rating>
-                }
+                  }
                   <div
                     class="bg-gray-200 flex border-2 border-primary-700 rounded-3xl items-center justify-center gap-2 py-1 px-2 w-12 p-1.5"
                   >
                     <span class="font-medium text-sm"> {{ item.rating }}</span>
                     <i class="pi pi-star-fill text-yellow-500"></i>
                   </div>
-                 
                 </div>
               </div>
-              <div class="flex flex-col justify-between items-end flex-1">
-                <div class="font-medium text-secondary text-2xl">
+              <div class="flex flex-row justify-between items-end flex-1 sm:flex-col">
+                <div class="font-medium text-secondary text-xl md:text-2xl whitespace-nowrap">
                   {{ item.price | priceFormat }} đ
                 </div>
                 <div class="flex flex-row gap-4">
@@ -72,6 +70,81 @@
                     (onClick)="addItemToCart(item)"
                   >
                   </p-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #grid let-items>
+      <div class="grid grid-cols-12 gap-4">
+        <div
+          *ngFor="let item of items"
+          class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3 p-2"
+        >
+          <div class="p-6 border bg-gray-300 rounded flex flex-col">
+            <div class="bg-surface-50 flex justify-center rounded p-4">
+              <div class="relative mx-auto">
+                <img
+                  class="rounded w-full"
+                  [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + item.image"
+                  [alt]="item.name"
+                  style="max-width: 300px"
+                />
+                <p-tag
+                  [value]="item.inventoryStatus"
+                  [severity]="getSeverity(item)"
+                  class="absolute dark:!bg-surface-900"
+                  [style.left.px]="4"
+                  [style.top.px]="4"
+                />
+              </div>
+            </div>
+            <div class="pt-6">
+              <div class="flex flex-row justify-between products-start gap-2">
+                <div>
+                  <div class="font-medium text-secondary text-sm">
+                    {{ item.category }}
+                  </div>
+                  <div class="font-medium text-secondary text-xl md:text-2xl">
+                    {{ item.name }}
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col gap-6 mt-6">
+                <div
+                  class="font-medium text-secondary text-sm cursor-pointer flex-row"
+                  (mouseenter)="showRating(item.id)"
+                  (mouseleave)="hideRating()"
+                >
+                  @if(hoveringProductId()===item.id){
+                  <p-rating> </p-rating>
+                  } @else{<span class="h-6 whitespace-nowrap text-sm">&nbsp;</span>}
+
+                  <div
+                    class="bg-gray-200 flex border-2 border-primary-700 rounded-3xl items-center justify-center gap-2 py-1 px-2 w-12 p-1.5"
+                  >
+                    <span class="font-medium text-sm"> {{ item.rating }}</span>
+                    <i class="pi pi-star-fill text-yellow-500"></i>
+                  </div>
+                </div>
+
+                <div class="flex flex-1 gap-2 w-full items-center justify-between">
+                  <div class="flex products-center gap-2 justify-center">
+                    <p-button
+                      class="flex-auto whitespace-nowrap"
+                      icon="pi pi-cart-plus"
+                      (onClick)="addItemToCart(item)"
+                    >
+                    </p-button>
+
+                    <p-button class="rounded-b-4xl" icon="pi pi-heart"> </p-button>
+                  </div>
+                  <div class="font-medium text-secondary text-xl md:text-2xl whitespace-nowrap">
+                    {{ item.price | priceFormat }} đ
+                  </div>
                 </div>
               </div>
             </div>

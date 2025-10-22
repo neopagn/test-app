@@ -1,4 +1,4 @@
-<div class="landing-container ">
+<div class="landing-container">
   <div class="main-content">
     @if (userInfo$ | async; as user) {
     <div class="user-details">
@@ -15,13 +15,19 @@
         </p-float-label>
       </div>
       <p class="text-lg text-gray-700">
-        MONEY: {{ currency | currency | capitalize }}|| BEFORE: {{ currency | priceFormat}}
+        MONEY: {{ currency | currency | capitalize }}|| BEFORE: {{ currency | priceFormat }}
       </p>
 
       <app-shopping-cart></app-shopping-cart>
     </div>
     } @else {
-    <p class="head-line">Chưa đăng nhập.</p>
+    <div class="text-black ">
+      <p class=" text-2xl text-center">Chưa đăng nhập.</p>
+      <div class=" button mt-6">
+        <button class=" btn btn-primary" [routerLink]="['/login']">Đăng nhập</button>
+        <button class=" btn btn-secondary" [routerLink]="['/register']">Đăng ký</button>
+      </div>
+    </div>
     }
   </div>
 </div>
